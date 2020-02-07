@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+
+		<!-- Webpage Title -->
+    <title>Tutorial</title>
+
+    <!-- 옳은 접근 -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='mystyle.css') }}">
+
+      <!-- 제이쿼리임트!!! -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+		<!-- JS -->
+    <!-- 파이썬파일가져와또
+    all_movies = list(db.movies.find())
+    result = dict()
+    num = 0
+    for movie in all_movies:
+        result[num] = {'rank' : movie['rank'],'title':movie['title'],'star':movie['star']}
+        num += 1 -->
+    <!--쳇
+
+        for let num=0; num=num+1 {
+          let title = response['num']['title'];
+          let rank  = response['num']['rank'];
+          let star  = response['num']['star'];
+          let temp_html = +rank+' '+title+' '+star+ ; -->
+<!--  for (let i=0; i++; ) {
+            let title = response[3]['title'];
+            let rank  = response[i]['rank'];
+            let star  = response[i]['star']; -->
+    <script>
+
+       $.ajax({
+        type: "GET",
+        url: "/movie_all",
+        data: {},
+
+        success: function(response){
+          for (i=0;i+=1;) {
+          rank  = response[i]['rank'];
+          title = response[i]['title'];
+          star  = response[i]['star'];
+
+          $('#test').append(rank,' ',title,':',star); }
+         }
+
+        })
+
+      </script>
+
+  </head>
+  <body>
+    <div class="wrap-grey-box container">
+      <!-- 회색 박스 -->
+      <h1>Hello, world!</h1>
+      <p id = "test"> </p>
+    </div>
+
+  </body>
+</html>
+
+
