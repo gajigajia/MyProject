@@ -1,0 +1,127 @@
+<html>
+<title> 스파르타코딩클럽 </title>
+<head>
+
+  <!--폰트와 Jquery-->
+  <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Oxanium|Yeon+Sung&display=swap" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"> </script>
+
+  <style type="text/css">
+
+      * {
+        font-family : 'Nanum Gothic', sans-serif;
+      }
+
+      body {
+        background-color : #dffff1;
+      }
+
+      table {
+        border-collapse: collapse;
+        font-size : 14px;
+        text-align : center;
+      }
+
+      td, th {
+        font-family: 'Oxanium',sans-serif ;
+        border: 1px solid #FFFFFF;
+        background: #ffddeb;
+        text-align: left;
+        padding: 8px;
+        width : 90px;
+        text-align : center;
+      }
+
+      tr:nth-child(even) {
+        background-color: #ffffff;
+      }
+
+      h1 {
+        border-radius: 13px;
+        background: #ffddeb;
+        box-shadow:  5px 5px 0px #665962,
+             -5px -5px 0px #ffffff;
+        width : 400px;
+        text-align : center;
+      }
+
+      .h5 {
+        border : 1px solid;
+        background-color : #FFFFFF;
+        border-color : #FFFFFF;
+      }
+
+  </style>
+
+  <script type="text/javascript">
+       
+     function index_check() {
+        $.ajax({
+        type : "GET",
+        url : "/database",
+        data : {},
+        
+     success: function(response){
+        let row = response["SP500"];
+        let rows = response["DOWJONES"];
+        let rows2 = response["NASDAQ"];
+          
+        for(let i = 0 ; i < 22;  i++) { //i++은  i = i +1
+ 
+        let Sdate = row[i]['date'];
+        let Svalue = row[i]['value'].toLocaleString("en-US"); // toLocaleString()은 천단위 콤마때문에 넣었는데 아무 일도 일어나지 않았다!
+        let Dvalue = rows[i]['value'].toLocaleString("en-US");
+        let Nvalue = rows2[i]['value'].toLocaleString("en-US");
+        let test =          
+                   '<tr>\
+                    <td>'+Sdate+'</td> \
+                    <td>'+Svalue+'</td> \
+                    <td>'+Dvalue+'</td> \
+                    <td>'+Nvalue+'</td> \
+                    </tr>' 
+          
+          $('#week_1').append(test);
+            
+              }
+            }
+          })
+        }
+        
+           
+
+  </script>   
+     
+
+</head>
+
+
+<body onload = "index_check()">
+
+<h1> 금융지수종가 크롤링 </h1>
+<p> .으로 표기된 것은 휴장일입니다. </p>
+  <!--<p> 보고싶은 날짜를 선택하세요 →
+  <input id ="start_date" type="date" value="2020-02-01" min="2020-01-01" max="2020-02-16">부터 5영업일
+   </p>
+  <span style = "font-size:10px">그러니까 월요일을 선택하는 것이 좋을 겁니다.</span> <p>
+    <button onclick="test()" type="button" class="btn btn-primary">지수확인</button>-->
+     
+    <table>
+     
+      <!--나중에는 여기에 input 받은 값 넣어야해 -->
+      <tr>
+        <th>DATE</th>
+        <th>S&P500</th>
+        <th>DowJones Industrial Avg</th>
+        <th>NASDAQ Composite</th>
+      </tr>
+     
+
+    <tbody id = "week_1" >
+      
+     
+    </tbody>
+  </table>
+</body>
+
+
+</html>
